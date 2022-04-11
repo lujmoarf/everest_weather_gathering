@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #################################################
-#
+##
 # Import weather data from Everest
 # https://nationalgeographic.org/earthpulse/weather/api/v1/history/combined
 #
