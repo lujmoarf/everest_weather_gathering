@@ -8,6 +8,7 @@
 import requests
 import json
 import pandas as pd
+import sys
 from datetime import datetime
 
 url = 'https://nationalgeographic.org/earthpulse/weather/api/v1/history/combined'
@@ -46,9 +47,18 @@ for m in df["measurements"].items():
 print("New imported data: ",len(df2.index))
 
 ### load previous database
-#db = pd.read_csv(r'/home/julien_maron/everest/database.csv',index_col=0)
-db = pd.read_csv(r'/home/julien/Documents/scripts/everest/database.csv',index_col=0)
-print("Rows in db before merge: ", len(db.index))
+try:
+    with open('./database.csv') as f:
+        db = pd.read_csv(r'./database.csv',index_col=0)
+        print('Rows in the db before merge: ', len(db.index))
+#        print('super open')
+except IOError:
+    #    print("Error: cannot find ./database.csv")
+    with open('database.csv', 'w+') as file:
+        file.write('id,timestamp,location,temperature,relative_humidity,wind_speed,wind_direction,pressure,wind_speed_sec')
+    print('New database file created')
+    db = pd.read_csv(r'./database.csv',index_col=0)
+#    sys.exit()
 
 ### ensure the timestamps are loaded properly
 db["timestamp"] = pd.to_datetime(db["timestamp"])
@@ -66,5 +76,5 @@ print("Final db rows after removing duplicates: ", len(new_db.index))
 
 
 ### write db to disk
-new_db.to_csv('/home/julien/Documents/scripts/everest/database.csv')
+new_db.to_csv('./database.csv')
 print("DB written on database.csv")
