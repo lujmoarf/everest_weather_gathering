@@ -10,3 +10,14 @@ https://www.nationalgeographic.com/adventure/article/mount-everest-highest-weath
 
 ![meteo station positions](https://www.nationalgeographic.com/interactive-assets/nggraphics/ngadventure-1906-ngs-everest-map/build-2019-06-12_14-59-00/ngm-assets/img/ngadventure-1906-ngs-everest-map_ai2html-mobile.jpg)
 
+# Stations
+there are 5 stations on the mountain.
+
+| station id | station name | altitude |   lat   |   long  |
+|------------|--------------|----------|---------|---------|
+|      1     | Basecamp     | 5,315 m  | 27.9952 | 86.8406 |
+|      2     | Camp II      | 6,464 m  | 27.981  | 86.9023 |
+|      3     | South Col    | 7,945 m  |         |         |
+|            | Balcony      | 8,430 m  |         |         |
+|      6     | Phortse      | 3,810 m  | 27.8456 | 86.7472 |
+
