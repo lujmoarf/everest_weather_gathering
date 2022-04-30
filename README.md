@@ -21,3 +21,11 @@ there are 5 stations on the mountain.
 |            | Balcony      | 8,430 m  |         |         |
 |      6     | Phortse      | 3,810 m  | 27.8456 | 86.7472 |
 
+
+
+# Database
+code is running in AWS cloud.
+the database can be accessible here
+
+http://ec2-34-209-92-115.us-west-2.compute.amazonaws.com:8090/database.csv
+
