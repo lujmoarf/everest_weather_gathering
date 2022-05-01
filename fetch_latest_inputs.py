@@ -65,7 +65,8 @@ db["timestamp"] = pd.to_datetime(db["timestamp"])
 df2["timestamp"] = pd.to_datetime(df2["timestamp"])
 
 ### merge df2 in db while removing the duplicate
-new_db = db.append(df2, ignore_index=True)
+#new_db = db.append(df2, ignore_index=True)
+new_db = pd.concat([db, df2], ignore_index=True)
 new_db["timestamp"] = pd.to_datetime(new_db["timestamp"])
 
 print("DB size after combining: ", len(new_db.index))
