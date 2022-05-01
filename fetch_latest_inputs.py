@@ -31,7 +31,7 @@ print("**************(", dt_string,")****************")
 # df2   => empty dataframe where the data from internet will be stored temporarily
 
 df = pd.DataFrame(data["measurements"])
-df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'wind_speed', 'wind_direction', 'pressure', 'wind_speed_sec'])
+df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'wind_speed', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation'])
 
 
 ### fill df2 from the inputs captured in df
@@ -41,7 +41,7 @@ i = 0
 for m in df["measurements"].items():
     l = l + 1
     for mm in m[1].items():
-        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"]]
+        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"],'']
         i = i + 1
 
 print("New imported data: ",len(df2.index))
@@ -51,14 +51,11 @@ try:
     with open('./database.csv') as f:
         db = pd.read_csv(r'./database.csv',index_col=0)
         print('Rows in the db before merge: ', len(db.index))
-#        print('super open')
 except IOError:
-    #    print("Error: cannot find ./database.csv")
     with open('database.csv', 'w+') as file:
-        file.write('id,timestamp,location,temperature,relative_humidity,wind_speed,wind_direction,pressure,wind_speed_sec')
+        file.write('id,timestamp,location,temperature,relative_humidity,wind_speed,wind_direction,pressure,wind_speed_sec,precipitation')
     print('New database file created')
     db = pd.read_csv(r'./database.csv',index_col=0)
-#    sys.exit()
 
 ### ensure the timestamps are loaded properly
 db["timestamp"] = pd.to_datetime(db["timestamp"])
