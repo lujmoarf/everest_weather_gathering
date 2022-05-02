@@ -31,7 +31,7 @@ print("**************(", dt_string,")****************")
 # df2   => empty dataframe where the data from internet will be stored temporarily
 
 df = pd.DataFrame(data["measurements"])
-df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'wind_speed', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation','WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50'])
+df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'WS_Max_h', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation','WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50'])
 
 
 ### fill df2 from the inputs captured in df
@@ -71,7 +71,7 @@ print("Duplicate timestamp and location: ", new_db.duplicated(subset=['timestamp
 
 new_db = new_db.drop_duplicates()
 print("Final db rows after removing duplicates: ", len(new_db.index))
-new_db = new_db.rename({'wind_speed': 'WS_Max_h'}, axis=1)
+#new_db = new_db.rename({'wind_speed': 'WS_Max_h'}, axis=1)
 
 ### write db to disk
 new_db.to_csv('./database.csv')
