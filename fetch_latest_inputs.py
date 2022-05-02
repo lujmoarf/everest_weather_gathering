@@ -31,7 +31,7 @@ print("**************(", dt_string,")****************")
 # df2   => empty dataframe where the data from internet will be stored temporarily
 
 df = pd.DataFrame(data["measurements"])
-df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'wind_speed', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation'])
+df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'wind_speed', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation','WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50'])
 
 
 ### fill df2 from the inputs captured in df
@@ -41,7 +41,7 @@ i = 0
 for m in df["measurements"].items():
     l = l + 1
     for mm in m[1].items():
-        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"],'']
+        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"],'','','','','','','']
         i = i + 1
 
 print("New imported data: ",len(df2.index))
@@ -53,7 +53,7 @@ try:
         print('Rows in the db before merge: ', len(db.index))
 except IOError:
     with open('database.csv', 'w+') as file:
-        file.write('id,timestamp,location,temperature,relative_humidity,wind_speed,wind_direction,pressure,wind_speed_sec,precipitation')
+        file.write('id,timestamp,location,temperature,relative_humidity,WS_Max,wind_direction,pressure,wind_speed_sec,precipitation,WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50')
     print('New database file created')
     db = pd.read_csv(r'./database.csv',index_col=0)
 
@@ -71,7 +71,7 @@ print("Duplicate timestamp and location: ", new_db.duplicated(subset=['timestamp
 
 new_db = new_db.drop_duplicates()
 print("Final db rows after removing duplicates: ", len(new_db.index))
-
+new_db = new_db.rename({'wind_speed': 'WS_Max_h'}, axis=1)
 
 ### write db to disk
 new_db.to_csv('./database.csv')
