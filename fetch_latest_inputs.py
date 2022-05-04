@@ -31,7 +31,7 @@ print("**************(", dt_string,")****************")
 # df2   => empty dataframe where the data from internet will be stored temporarily
 
 df = pd.DataFrame(data["measurements"])
-df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'WS_Max_h', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation','WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50'])
+df2 = pd.DataFrame(columns=['timestamp', 'location', 'temperature', 'relative_humidity', 'WS_Max_h', 'wind_direction', 'pressure', 'wind_speed_sec', 'precipitation','WS_Average','SW_IN_AVG','SW_OUT_AVG','LW_IN_AVG','LW_OUT_AVG','SR50','WS_Max_2','Wind_Dir_2','T_109'])
 
 
 ### fill df2 from the inputs captured in df
@@ -41,7 +41,7 @@ i = 0
 for m in df["measurements"].items():
     l = l + 1
     for mm in m[1].items():
-        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"],'','','','','','','']
+        df2.loc[i] = [df["timestamp"][l], mm[1]['location_id'], mm[1]['temperature'], mm[1]['relative_humidity'], mm[1]["wind_speed"], mm[1]["wind_direction"], mm[1]["pressure"], mm[1]["wind_speed_sec"],'','','','','','','','','','']
         i = i + 1
 
 print("New imported data: ",len(df2.index))
